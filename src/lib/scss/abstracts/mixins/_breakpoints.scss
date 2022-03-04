@@ -1,0 +1,27 @@
+@use '../variables';
+
+/**
+ * Get the breakpoint with the given name. 
+ */
+@function breakpoint-min($bp-name, $breakpoints: variables.$grid-breakpoints) {
+	$min: map-get($breakpoints, $bp-name);
+	@if $min != 0 {
+		@return $min;
+	} @else {
+		@return null;
+	}
+}
+
+/** 
+ * Media query of the given breakpoint name and up, inclusive.
+ */
+@mixin media-breakpoint-min($bp-name, $breakpoints: variables.$grid-breakpoints) {
+	$min: breakpoint-min($bp-name, $breakpoints);
+	@if $min {
+		@media (min-width: $min) {
+			@content;
+		}
+	} @else {
+		@content;
+	}
+}
