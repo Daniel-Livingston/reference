@@ -1,6 +1,6 @@
 export type Page = {
 	id: number;
 	href: string;
-	title?: string;
-	breadcrumbs: number[];
+	title: string;
+	breadcrumbs: { id: number; href: string; title: string }[];
 };

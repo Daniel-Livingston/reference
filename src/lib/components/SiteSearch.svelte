@@ -7,12 +7,36 @@
 	const fuse = new Fuse(pages, { keys: ['title'], includeMatches: true });
 	let value: string = '';
 
-	$: searchResults = fuse.search(value);
+	$: searchResults = fuse.search(value).slice(0, 10);
 	$: expanded = !!value;
 	$: hasResults = searchResults.length > 0;
 
 	function clearSearchField() {
 		value = '';
+	}
+
+	function changeFocusOnArrows(e: KeyboardEvent) {
+		const menu = document.querySelector('#site-search-menu');
+		const node = <HTMLElement>e.target;
+		if (e.key === 'ArrowDown') {
+			e.preventDefault();
+			const firstResult = <HTMLElement>menu.querySelector('.result-item');
+			if (node.classList.contains('result-item')) {
+				const nextResult = <HTMLElement>node.nextSibling;
+				return nextResult ? nextResult.focus() : firstResult.focus();
+			} else {
+				return firstResult.focus();
+			}
+		} else if (e.key === 'ArrowUp') {
+			e.preventDefault();
+			const lastResult = <HTMLElement>menu.querySelector('.result-item:last-child');
+			if (node.classList.contains('result-item')) {
+				const previousResult = <HTMLElement>node.previousSibling;
+				return previousResult ? previousResult.focus() : lastResult.focus();
+			} else {
+				return lastResult.focus();
+			}
+		}
 	}
 </script>
 
@@ -26,6 +50,7 @@
 	aria-haspopup="listbox"
 	aria-owns="site-search-menu"
 	aria-expanded={expanded}
+	on:keydown={changeFocusOnArrows}
 >
 	<label id="site-search-label" class="search-input-wrapper">
 		<input
@@ -58,7 +83,12 @@
 			<div class="search-results">
 				{#each searchResults as result}
 					<a class="result-item" href={result.item.href} on:click={clearSearchField}>
-						<div>{result.item.title}</div>
+						<div class="result-item-title">{result.item.title}</div>
+						<div class="result-item-breadcrumbs">
+							{#each result.item.breadcrumbs as breadcrumb}
+								<span class="result-item-breadcrumb">{breadcrumb.title}</span>
+							{/each}
+						</div>
 					</a>
 				{/each}
 			</div>
@@ -129,5 +159,18 @@
 
 	.result-item + .result-item {
 		border-top: var(--border);
+	}
+
+	.result-item-breadcrumbs {
+		font-size: 1rem;
+		margin-top: 0.5rem;
+		opacity: 0.6;
+	}
+
+	.result-item-breadcrumb + .result-item-breadcrumb {
+		&::before {
+			content: '>';
+			margin: 0 0.25rem;
+		}
 	}
 </style>

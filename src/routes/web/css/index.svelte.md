@@ -1,12 +1,12 @@
 ---
-title: Cascading Style Sheets (CSS)
+title: CSS
 ---
 
 <script context="module">
   export function load() {
     return {
       stuff: {
-        title: 'Cascading Style Sheets (CSS)'
+        title: 'CSS'
       }
     };
   }

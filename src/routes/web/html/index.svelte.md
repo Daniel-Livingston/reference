@@ -1,12 +1,12 @@
 ---
-title: HyperText Markup Language (HTML)
+title: HTML
 ---
 
 <script context="module">
   export function load() {
     return {
       stuff: {
-        title: 'HyperText Markup Language (HTML)'
+        title: 'HTML'
       }
     };
   }

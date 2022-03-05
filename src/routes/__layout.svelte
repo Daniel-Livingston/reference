@@ -34,15 +34,22 @@
 {#if currentPage}
 	<nav class="breadcrumbs-container">
 		<ol class="breadcrumbs" aria-label="breadcrumbs">
-			{#each currentPage.breadcrumbs as pageId}
-				{@const breadcrumbPage = pages[pageId - 1]}
-				<li class="breadcrumb"><a href={breadcrumbPage.href}>{breadcrumbPage.title}</a></li>
+			{#each currentPage.breadcrumbs as { id, title, href }}
+				{#if currentPage.id === id}
+					<li class="breadcrumb">{title}</li>
+				{:else}
+					<li class="breadcrumb">
+						<a {href}>{title}</a>
+					</li>
+				{/if}
 			{/each}
 		</ol>
 	</nav>
 {/if}
 
-<slot />
+<div class="content-wrapper">
+	<slot />
+</div>
 
 <style lang="scss">
 	header {
@@ -79,5 +86,9 @@
 
 	.breadcrumb a {
 		color: var(--accent-color);
+	}
+
+	.content-wrapper {
+		@include make-container('xxl');
 	}
 </style>

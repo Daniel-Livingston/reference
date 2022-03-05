@@ -2,14 +2,12 @@
 	import { page } from '$app/stores';
 </script>
 
-<div class="article-wrapper">
-	<main>
-		<article>
-			<h1>{$page.stuff.title}</h1>
-			<slot />
-		</article>
-	</main>
-</div>
+<main>
+	<article>
+		<h1>{$page.stuff.title}</h1>
+		<slot />
+	</article>
+</main>
 
 <style lang="scss">
 	.article-wrapper {

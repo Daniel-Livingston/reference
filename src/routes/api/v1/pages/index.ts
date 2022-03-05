@@ -9,7 +9,7 @@ export const get: RequestHandler = async () => {
 	const pages: Page[] = [];
 
 	let id = 1;
-	const breadcrumbs = [];
+	const breadcrumbs: { id: number; title: string; href: string }[] = [];
 
 	for (const path in modules) {
 		const mod = await modules[path]();
@@ -24,16 +24,17 @@ export const get: RequestHandler = async () => {
 		if (href.match(/\/_/)) continue;
 
 		while (breadcrumbs.length > 0) {
-			const lastBreadcrumbId = breadcrumbs.pop();
-			const lastBreadcrumbIndex = lastBreadcrumbId - 1;
-			if (href.includes(pages[lastBreadcrumbIndex].href)) {
-				breadcrumbs.push(lastBreadcrumbId);
+			const lastBreadcrumb = breadcrumbs.pop();
+			if (href.includes(lastBreadcrumb.href)) {
+				breadcrumbs.push(lastBreadcrumb);
 				break;
 			}
 		}
 
-		pages.push({ id, href, title: mod.metadata.title, breadcrumbs: [...breadcrumbs] });
-		breadcrumbs.push(id);
+		const title = mod.metadata.title;
+
+		breadcrumbs.push({ id, href, title });
+		pages.push({ id, href, title, breadcrumbs: [...breadcrumbs] });
 		id++;
 	}
 
