@@ -1,0 +1,9 @@
+@use '$scss/abstracts/mixins';
+
+.visually-hidden {
+	@include mixins.visually-hidden();
+}
+
+.visually-hidden-focusable {
+	@include mixins.visually-hidden-focusable();
+}

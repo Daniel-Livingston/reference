@@ -1,6 +1,5 @@
-@use '$lib/scss/base/typography';
-@use '$lib/scss/base/code';
+@use '$lib/scss/base/root';
 
-code {
-	font-family: code.$font-family;
-}
+@use '$lib/scss/base/code';
+@use '$lib/scss/base/typography';
+@use '$lib/scss/base/visually-hidden';

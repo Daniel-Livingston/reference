@@ -1,0 +1,29 @@
+@use '../variables';
+
+/**
+ * Get the breakpoint with the given name. 
+ */
+@function container-size($bp-name, $breakpoints: variables.$grid-breakpoints) {
+	$container-size: map-get($breakpoints, $bp-name);
+	@if $container-size != 0 {
+		@return $container-size;
+	} @else {
+		@return null;
+	}
+}
+
+/** 
+ * Media query of the given breakpoint name and up, inclusive.
+ */
+@mixin make-container($bp-name, $breakpoints: variables.$grid-breakpoints) {
+	$container-size: container-size($bp-name, $breakpoints);
+	@if $container-size {
+		max-width: $container-size;
+		margin-left: auto;
+		margin-right: auto;
+		padding-left: 1rem;
+		padding-right: 1rem;
+	} @else {
+		@content;
+	}
+}

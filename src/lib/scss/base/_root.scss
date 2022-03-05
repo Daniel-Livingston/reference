@@ -1,0 +1,17 @@
+@use '$scss/abstracts/variables';
+
+:root {
+	@each $theme, $theme-colors in variables.$code-theme-colors {
+		@each $variable-prefix, $value in $theme-colors {
+			@if $theme == 'light' {
+				@media (prefers-color-scheme: light) {
+					--code-#{$variable-prefix}: #{$value};
+				}
+			} @else if $theme == 'dark' {
+				@media (prefers-color-scheme: dark) {
+					--code-#{$variable-prefix}: #{$value};
+				}
+			}
+		}
+	}
+}
