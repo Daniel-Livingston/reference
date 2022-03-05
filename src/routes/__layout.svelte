@@ -74,6 +74,7 @@
 	.breadcrumbs {
 		@include make-container('xxl');
 		display: flex;
+		flex-wrap: wrap;
 		list-style: none;
 	}
 

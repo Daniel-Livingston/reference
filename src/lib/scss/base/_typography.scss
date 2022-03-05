@@ -18,6 +18,12 @@ code {
 	font-family: variables.$code-font-family;
 }
 
+:not(pre) code {
+	background-color: var(--secondary-bg-color);
+	color: var(--accent-color);
+	font-weight: bold;
+}
+
 code[class*='language-'],
 pre[class*='language-'] {
 	background: var(--code-syntax-bg);

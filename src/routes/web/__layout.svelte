@@ -8,9 +8,3 @@
 		<slot />
 	</article>
 </main>
-
-<style lang="scss">
-	.article-wrapper {
-		@include make-container('xxl');
-	}
-</style>
