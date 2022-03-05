@@ -1,5 +1,26 @@
 $code-font-family: 'Fira Code', monospace;
 
+$theme-colors: (
+	'light': (
+		'primary-bg': #fff,
+		'primary-text': #000,
+		'secondary-bg': hsl(239, 80%, 97%),
+		'secondary-hover-bg': hsl(239, 40%, 92%),
+		'accent': hsl(239, 100%, 50%),
+		'border': rgba(0, 0, 0, 0.2),
+		'focus': hsl(239, 88%, 30%)
+	),
+	'dark': (
+		'primary-bg': hsl(239, 88%, 5%),
+		'primary-text': hsl(239, 88%, 98%),
+		'secondary-bg': hsl(239, 40%, 12%),
+		'secondary-hover-bg': hsl(239, 40%, 8%),
+		'accent': hsl(239, 100%, 85%),
+		'border': rgba(255, 255, 255, 0.2),
+		'focus': hsl(239, 88%, 70%)
+	)
+);
+
 $code-theme-colors: (
 	'light': (
 		'mono-1': hsl(230, 8%, 24%),
@@ -14,7 +35,7 @@ $code-theme-colors: (
 		'hue-6': hsl(35, 99%, 36%),
 		'hue-6-2': hsl(35, 99%, 40%),
 		'syntax-fg': hsl(230, 8%, 24%),
-		'syntax-bg': hsl(230, 1%, 98%),
+		'syntax-bg': var(--secondary-bg-color),
 		'syntax-gutter': hsl(230, 1%, 62%),
 		'syntax-guide': hsla(230, 8%, 24%, 0.2),
 		'syntax-accent': hsl(230, 100%, 66%),
@@ -35,7 +56,7 @@ $code-theme-colors: (
 		'hue-6': hsl(29, 54%, 61%),
 		'hue-6-2': hsl(39, 67%, 69%),
 		'syntax-fg': hsl(220, 14%, 71%),
-		'syntax-bg': hsl(220, 13%, 18%),
+		'syntax-bg': var(--secondary-bg-color),
 		'syntax-gutter': hsl(220, 14%, 45%),
 		'syntax-guide': hsla(220, 14%, 71%, 0.15),
 		'syntax-accent': hsl(220, 100%, 66%),

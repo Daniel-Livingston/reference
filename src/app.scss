@@ -3,3 +3,25 @@
 @use '$lib/scss/base/code';
 @use '$lib/scss/base/typography';
 @use '$lib/scss/base/visually-hidden';
+
+body {
+	background-color: var(--primary-bg-color);
+	color: var(--primary-text-color);
+	margin: 0;
+}
+
+h1 {
+	font-size: clamp(2rem, calc(2rem + ((1vw - 7.68px) * 5.0633)), 4rem);
+	font-weight: 200;
+}
+
+h2 {
+	font-size: clamp(1.75rem, calc(1.75rem + ((1vw - 7.68px) * 1.8987)), 2.5rem);
+	font-weight: 200;
+}
+
+body {
+	@include media-breakpoint-min('md') {
+		font-size: 1.25rem;
+	}
+}

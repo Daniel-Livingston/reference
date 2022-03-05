@@ -8,6 +8,9 @@ export const get: RequestHandler = async () => {
 	const modules = import.meta.glob('../../../**/*.svelte(.md)?');
 	const pages: Page[] = [];
 
+	let id = 1;
+	const breadcrumbs = [];
+
 	for (const path in modules) {
 		const mod = await modules[path]();
 		if (mod.metadata && mod.metadata.excludeFromSearch) continue;
@@ -15,12 +18,23 @@ export const get: RequestHandler = async () => {
 		const href = path
 			.replace('../../../', '/') // Get rid of the beginning of every route
 			.replace(/.svelte(?:.md)?/, '') // Remove the file ending
-			.replace(/index$/, '') // Change indexes to the base route
-			.replace(/([^/])$/, '$1/'); // Add a trailing backslash
+			.replace(/index$/, '')
+			.replace(/(?<=\w)\/$/, ''); // Change indexes to the base route
 
 		if (href.match(/\/_/)) continue;
 
-		pages.push({ href, title: mod.metadata ? mod.metadata.title : '' });
+		while (breadcrumbs.length > 0) {
+			const lastBreadcrumbId = breadcrumbs.pop();
+			const lastBreadcrumbIndex = lastBreadcrumbId - 1;
+			if (href.includes(pages[lastBreadcrumbIndex].href)) {
+				breadcrumbs.push(lastBreadcrumbId);
+				break;
+			}
+		}
+
+		pages.push({ id, href, title: mod.metadata.title, breadcrumbs: [...breadcrumbs] });
+		breadcrumbs.push(id);
+		id++;
 	}
 
 	return {

@@ -10,6 +10,10 @@
 	$: searchResults = fuse.search(value);
 	$: expanded = !!value;
 	$: hasResults = searchResults.length > 0;
+
+	function clearSearchField() {
+		value = '';
+	}
 </script>
 
 <form
@@ -53,7 +57,7 @@
 		{#if expanded && hasResults}
 			<div class="search-results">
 				{#each searchResults as result}
-					<a class="result-item" href={result.item.href}>
+					<a class="result-item" href={result.item.href} on:click={clearSearchField}>
 						<div>{result.item.title}</div>
 					</a>
 				{/each}
@@ -70,7 +74,8 @@
 	}
 
 	.search-input-wrapper {
-		border: 2px solid rgba(0, 0, 0, 0.2);
+		background: var(--secondary-bg-color);
+		border: var(--border);
 		border-radius: 100vw;
 		display: flex;
 		align-items: center;
@@ -78,12 +83,14 @@
 		padding: 0.25rem 1rem;
 
 		&:focus-within {
-			box-shadow: 0 0 3px 3px blue;
+			box-shadow: var(--focus-shadow);
 		}
 	}
 
 	input {
+		background: none;
 		border: none;
+		color: inherit;
 		width: calc(100% - 1rem);
 		font: inherit;
 		outline: none;
@@ -96,8 +103,9 @@
 	}
 
 	.expanded > .search-menu {
-		background-color: #fff;
-		border: 2px solid rgba(0, 0, 0, 0.2);
+		background-color: var(--secondary-bg-color);
+		border: var(--border);
+		border-radius: 0.25rem;
 		position: absolute;
 		top: 125%;
 		width: 100%;
@@ -111,10 +119,15 @@
 	}
 
 	a.result-item:hover {
-		background-color: #eee;
+		background-color: var(--secondary-hover-bg-color);
+	}
+
+	a.result-item:focus {
+		box-shadow: var(--focus-shadow);
+		z-index: 100;
 	}
 
 	.result-item + .result-item {
-		border-top: 2px solid rgba(0, 0, 0, 0.2);
+		border-top: var(--border);
 	}
 </style>

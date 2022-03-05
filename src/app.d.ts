@@ -7,4 +7,7 @@ declare namespace App {
 	// interface Platform {}
 	// interface Session {}
 	// interface Stuff {}
+	interface Stuff {
+		title: string;
+	}
 }

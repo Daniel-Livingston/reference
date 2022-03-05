@@ -2,7 +2,15 @@
 title: Regular expressions
 ---
 
-# {title}
+<script context="module">
+  export function load() {
+    return {
+      stuff: {
+        title: 'Regular expressions'
+      }
+    };
+  }
+</script>
 
 ## Assertions
 
