@@ -139,6 +139,7 @@
 		position: absolute;
 		top: 125%;
 		width: 100%;
+		z-index: 1000;
 	}
 
 	.result-item {
@@ -154,7 +155,6 @@
 
 	a.result-item:focus {
 		box-shadow: var(--focus-shadow);
-		z-index: 100;
 	}
 
 	.result-item + .result-item {

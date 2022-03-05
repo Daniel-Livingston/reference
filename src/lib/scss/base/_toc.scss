@@ -1,0 +1,29 @@
+@use '$scss/abstracts/mixins';
+
+.toc {
+	display: none;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+
+	@include mixins.media-breakpoint-min('md') {
+		display: block;
+	}
+}
+
+.toc-link {
+	border-left: var(--border);
+	color: var(--primary-text-color);
+	display: block;
+	font-size: 1rem;
+	padding: 1rem 1rem;
+	text-decoration: none;
+
+	&:hover {
+		color: var(--accent-color);
+	}
+
+	&:focus {
+		box-shadow: var(--focus-shadow);
+	}
+}

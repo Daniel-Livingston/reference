@@ -47,7 +47,7 @@
 	</nav>
 {/if}
 
-<div class="content-wrapper">
+<div class="article-wrapper">
 	<slot />
 </div>
 
@@ -89,7 +89,13 @@
 		color: var(--accent-color);
 	}
 
-	.content-wrapper {
+	.article-wrapper {
 		@include make-container('xxl');
+		@include media-breakpoint-min('md') {
+			display: grid;
+			grid-template-areas: 'article toc';
+			grid-template-columns: 1fr 15rem;
+			gap: 2rem;
+		}
 	}
 </style>
