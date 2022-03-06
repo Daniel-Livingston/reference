@@ -42,6 +42,10 @@ td:first-child {
 	word-break: break-all;
 }
 
+td:not(:first-child) {
+	word-break: break-word;
+}
+
 a:not([class]) {
 	@include make-link();
 }
