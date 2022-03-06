@@ -8,11 +8,8 @@
 body {
 	background-color: var(--primary-bg-color);
 	color: var(--primary-text-color);
+	font-size: clamp(1rem, calc(1rem + ((1vw - 7.68px) * 0.3165)), 1.125rem);
 	margin: 0;
-
-	@include media-breakpoint-min('md') {
-		font-size: 1.25rem;
-	}
 }
 
 h1 {

@@ -68,31 +68,6 @@
 		margin-left: auto;
 	}
 
-	.breadcrumbs-container {
-		background: var(--secondary-bg-color);
-		border-top: var(--border);
-		border-bottom: var(--border);
-		padding: 0.25rem 0;
-	}
-
-	.breadcrumbs {
-		@include make-container('xxl');
-		display: flex;
-		flex-wrap: wrap;
-		list-style: none;
-	}
-
-	.breadcrumb + .breadcrumb {
-		&::before {
-			content: '>';
-			margin: 0 1rem;
-		}
-	}
-
-	.breadcrumb a {
-		color: var(--accent-color);
-	}
-
 	.article-wrapper {
 		@include make-container('xxl');
 		@include media-breakpoint-min('md') {
