@@ -23,24 +23,28 @@
 		background: var(--secondary-bg-color);
 		border-top: var(--border);
 		border-bottom: var(--border);
+		overflow-x: auto;
 		padding: 0.25rem 0;
 	}
 
 	.breadcrumbs {
 		@include make-container('xxl');
 		display: flex;
-		flex-wrap: wrap;
 		list-style: none;
 	}
 
-	.breadcrumb + .breadcrumb {
-		&::before {
-			content: '>';
-			margin: 0 1rem;
-		}
-	}
+	.breadcrumb {
+		white-space: nowrap;
 
-	.breadcrumb a {
-		@include make-link();
+		& + .breadcrumb {
+			&::before {
+				content: '>';
+				margin: 0 1rem;
+			}
+		}
+
+		a {
+			@include make-link();
+		}
 	}
 </style>
