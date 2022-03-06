@@ -4,7 +4,10 @@ import toc from '@jsdevtools/rehype-toc';
 
 const config = defineConfig({
 	extensions: ['.svelte.md', '.md', '.svx'],
-	layout: { article: './src/lib/layouts/Article.svelte' },
+	layout: {
+		article: './src/lib/layouts/Article.svelte',
+		archive: './src/lib/layouts/Archive.svelte'
+	},
 
 	smartypants: {
 		dashes: 'oldschool'

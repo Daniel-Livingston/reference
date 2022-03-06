@@ -40,9 +40,13 @@
 	<Breadcrumbs page={currentPage} />
 {/if}
 
-<div class="article-wrapper">
+<div class="content-wrapper {$page.stuff.layout}">
 	<slot />
 </div>
+
+<footer>
+	<div class="footer-inner">This is a reference handbook made by Daniel Livingston.</div>
+</footer>
 
 <style lang="scss">
 	.skip-link {
@@ -71,13 +75,14 @@
 		margin-left: auto;
 	}
 
-	.article-wrapper {
+	footer {
+		background-color: var(--secondary-bg-color);
+		border-top: var(--border);
+		margin-top: 2rem;
+	}
+
+	.footer-inner {
 		@include make-container('xxl');
-		@include media-breakpoint-min('md') {
-			display: grid;
-			grid-template-areas: 'article toc';
-			grid-template-columns: 1fr 15rem;
-			gap: 2rem;
-		}
+		padding: 1rem;
 	}
 </style>

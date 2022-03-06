@@ -8,6 +8,7 @@ declare namespace App {
 	// interface Session {}
 	// interface Stuff {}
 	interface Stuff {
-		title: string;
+		title?: string;
+		layout?: string;
 	}
 }

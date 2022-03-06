@@ -1,5 +1,5 @@
 ---
-title: preg_match
+title: preg_match()
 layout: article
 ---
 
@@ -7,7 +7,8 @@ layout: article
   export function load() {
     return {
       stuff: {
-        title: 'preg_match - PHP'
+        title: 'preg_match - PHP',
+        layout: 'article'
       }
     };
   }
@@ -58,3 +59,7 @@ preg_match(
 ```php
 preg_match('/php/i', 'PHP is a language.');
 ```
+
+## References
+
+- [preg_match | PHP Manual](https://www.php.net/manual/en/function.preg-match.php)
