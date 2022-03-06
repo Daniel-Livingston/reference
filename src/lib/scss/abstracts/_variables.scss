@@ -7,7 +7,7 @@ $theme-colors: (
 		'secondary-bg': hsl(239, 80%, 97%),
 		'secondary-hover-bg': hsl(239, 40%, 92%),
 		'accent': hsl(239, 100%, 50%),
-		'border': rgba(0, 0, 0, 0.2),
+		'border': hsl(239, 30%, 80%),
 		'focus': hsl(239, 88%, 30%)
 	),
 	'dark': (
@@ -16,7 +16,7 @@ $theme-colors: (
 		'secondary-bg': hsl(239, 40%, 12%),
 		'secondary-hover-bg': hsl(239, 40%, 8%),
 		'accent': hsl(239, 100%, 85%),
-		'border': rgba(255, 255, 255, 0.2),
+		'border': hsl(239, 30%, 30%),
 		'focus': hsl(239, 88%, 70%)
 	)
 );
