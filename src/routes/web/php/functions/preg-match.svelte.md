@@ -7,7 +7,7 @@ layout: article
   export function load() {
     return {
       stuff: {
-        title: 'preg_match - PHP',
+        title: 'preg_match() - PHP',
         layout: 'article'
       }
     };

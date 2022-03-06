@@ -49,8 +49,10 @@ th {
 	background-color: var(--secondary-bg-color);
 }
 
-td:first-child {
+td:first-child,
+th:first-child {
 	word-break: break-all;
+	width: min(40vw, 250px);
 }
 
 td:not(:first-child) {
