@@ -4,7 +4,7 @@ layout: article
 ---
 
 <script context="module">
-  export function load() {
+  export async function load() {
     return {
       stuff: {
         title: 'Regular expressions'
@@ -65,6 +65,18 @@ layout: article
 | `\k<Name>`           | A back reference to the last substring matching the **named capturing group** specified by `Name`.  |
 | `(?<Name>x)`         | **Named capturing group**. Matches `x` and stores it under the name specified by `Name`.            |
 | `(?:x)`              | **Non-capturing group**. Matches `x` but does not remember the match.                               |
+
+## Quantifiers
+
+| Characters                                                  | Meaning                                                                                   |
+| ----------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
+| `x*`                                                        | Matches the preceding item `x` 0 or more times.                                           |
+| `x+`                                                        | Matches the preceding item `x` 1 or more times.                                           |
+| `x?`                                                        | Matches the preceding item `x` 0 or 1 time(s).                                            |
+| `x{n}`                                                      | Matches the preceding item `x` exactly `n` times.                                         |
+| `x{n,}`                                                     | Matches the preceding item `x` at least `n` times.                                        |
+| `x{n,m}`                                                    | Matches the preceding item `x` at least `n` and at most `m` times.                        |
+| `x*?`<br>`x+?`<br>`x??`<br>`x{n}?`<br>`x{n,}?`<br>`x{n,m}?` | Makes the quantifier _non-greedy_, meaning that it will stop as soon as it finds a match. |
 
 ## References
 

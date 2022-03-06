@@ -4,7 +4,7 @@ import type { Page } from '$lib/types/pages';
 /**
  * Get a list of all the pages in the site.
  */
-export const get: RequestHandler = async () => {
+export const get: RequestHandler = async ({ url: { searchParams: params } }) => {
 	const modules = import.meta.glob('../../../**/*.svelte(.md)?');
 	const pages: Page[] = [];
 
@@ -31,10 +31,30 @@ export const get: RequestHandler = async () => {
 			}
 		}
 
-		const title = mod.metadata.title;
+		const title = mod.metadata && mod.metadata.title;
 
 		breadcrumbs.push({ id, href, title });
-		pages.push({ id, href, title, breadcrumbs: [...breadcrumbs] });
+		if (params.get('parent')) {
+			const parentPattern = new RegExp(
+				`^${decodeURIComponent(params.get('parent'))}(?=/[a-zA-Z])`,
+				'i'
+			);
+			if (href.match(parentPattern)) {
+				pages.push({
+					id,
+					href,
+					title,
+					breadcrumbs: [...breadcrumbs]
+				});
+			}
+		} else {
+			pages.push({
+				id,
+				href,
+				title,
+				breadcrumbs: [...breadcrumbs]
+			});
+		}
 		id++;
 	}
 

@@ -145,6 +145,7 @@
 	.result-item {
 		color: inherit;
 		display: block;
+		font-weight: 500;
 		padding: 1em;
 		text-decoration: none;
 	}
@@ -162,9 +163,11 @@
 	}
 
 	.result-item-breadcrumbs {
-		font-size: 1rem;
+		font-size: 0.9rem;
 		margin-top: 0.5rem;
-		opacity: 0.6;
+		opacity: 0.5;
+		display: flex;
+		flex-wrap: wrap;
 	}
 
 	.result-item-breadcrumb + .result-item-breadcrumb {

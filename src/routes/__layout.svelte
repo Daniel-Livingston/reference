@@ -3,12 +3,11 @@
 	import type { Page } from '$lib/types/pages';
 
 	export const load: Load = async ({ fetch }) => {
-		const response = await fetch('/api/v1/pages');
+		const response = await fetch('/api/v1/pages.json');
 
 		return {
 			props: {
-				pages: response.ok && ((await response.json()) as Page[]),
-				test: 'hello'
+				pages: response.ok && ((await response.json()) as Page[])
 			}
 		};
 	};
@@ -23,6 +22,10 @@
 	export let pages: Page[];
 	$: currentPage = pages.find((p) => p.href === $page.url.pathname);
 </script>
+
+<svelte:head>
+	<title>{$page.stuff.title} | Handbook</title>
+</svelte:head>
 
 <a class="skip-link" href="#content">Skip to content</a>
 <header>
