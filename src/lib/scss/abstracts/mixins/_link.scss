@@ -1,0 +1,8 @@
+@mixin make-link() {
+	color: var(--accent-color);
+
+	&:focus {
+		box-shadow: var(--focus-shadow);
+		outline: none;
+	}
+}

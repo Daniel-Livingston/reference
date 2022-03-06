@@ -1,7 +1,6 @@
 @use '$lib/scss/base/root';
 
 @use '$lib/scss/base/code';
-@use '$lib/scss/base/tables';
 @use '$lib/scss/base/toc';
 @use '$lib/scss/base/typography';
 @use '$lib/scss/base/visually-hidden';
@@ -10,6 +9,10 @@ body {
 	background-color: var(--primary-bg-color);
 	color: var(--primary-text-color);
 	margin: 0;
+
+	@include media-breakpoint-min('md') {
+		font-size: 1.25rem;
+	}
 }
 
 h1 {
@@ -22,12 +25,26 @@ h2 {
 	font-weight: 200;
 }
 
-* + h2 {
-	margin-top: 2em;
+table {
+	border-collapse: collapse;
+	width: 100%;
 }
 
-body {
-	@include media-breakpoint-min('md') {
-		font-size: 1.25rem;
-	}
+td,
+th {
+	border: var(--border);
+	padding: 1rem;
+	text-align: left;
+}
+
+th {
+	background-color: var(--secondary-bg-color);
+}
+
+td:first-child {
+	width: 1%;
+}
+
+a:not([class]) {
+	@include make-link();
 }

@@ -16,6 +16,7 @@
 
 <script lang="ts">
 	import { page } from '$app/stores';
+	import Breadcrumbs from '$lib/components/Breadcrumbs.svelte';
 	import SiteSearch from '$lib/components/SiteSearch.svelte';
 	import '../app.scss';
 
@@ -23,6 +24,7 @@
 	$: currentPage = pages.find((p) => p.href === $page.url.pathname);
 </script>
 
+<a class="skip-link" href="#content">Skip to content</a>
 <header>
 	<nav class="main-nav">
 		<div class="misc-wrapper">
@@ -32,19 +34,7 @@
 </header>
 
 {#if currentPage}
-	<nav class="breadcrumbs-container">
-		<ol class="breadcrumbs" aria-label="breadcrumbs">
-			{#each currentPage.breadcrumbs as { id, title, href }}
-				{#if currentPage.id === id}
-					<li class="breadcrumb">{title}</li>
-				{:else}
-					<li class="breadcrumb">
-						<a {href}>{title}</a>
-					</li>
-				{/if}
-			{/each}
-		</ol>
-	</nav>
+	<Breadcrumbs page={currentPage} />
 {/if}
 
 <div class="article-wrapper">
@@ -52,6 +42,20 @@
 </div>
 
 <style lang="scss">
+	.skip-link {
+		@include visually-hidden-focusable();
+		text-decoration: none;
+
+		&:focus {
+			box-shadow: var(--focus-shadow);
+			color: var(--accent-color);
+			padding: 1rem;
+			position: absolute;
+			top: 0.25rem;
+			left: 0.25rem;
+		}
+	}
+
 	header {
 		padding: 1rem 0;
 	}

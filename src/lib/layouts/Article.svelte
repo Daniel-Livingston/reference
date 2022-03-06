@@ -1,4 +1,4 @@
-<main>
+<main id="content">
 	<article>
 		<slot />
 	</article>
@@ -19,9 +19,5 @@
 		position: -webkit-sticky;
 		position: sticky;
 		top: 3rem;
-	}
-
-	:global(h2:first-child) {
-		margin-top: 3rem;
 	}
 </style>
