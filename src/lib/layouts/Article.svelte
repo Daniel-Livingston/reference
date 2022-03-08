@@ -21,6 +21,14 @@
 		grid-area: article;
 	}
 
+	article > :global(*) {
+		margin-bottom: 0;
+	}
+
+	article > :global(* + *) {
+		margin-top: 1.75em;
+	}
+
 	:global(.toc-container) {
 		grid-area: toc;
 		padding: 3rem 1rem 1rem 1rem;

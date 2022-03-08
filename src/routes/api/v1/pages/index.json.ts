@@ -66,9 +66,10 @@ function sortModules(
 ): ModuleMap {
 	const sortedModules: ModuleMap = [];
 	for (const [filePath, importFn] of Object.entries(modules)) {
+		if (filePath.includes('/api/')) continue;
 		const href = filePath
 			.replace('../../../', '/') // Get rid of the beginning of every route
-			.replace(/.svelte(?:.md)?/, '') // Remove the file ending
+			.replace(/[.]svelte(?:[.]md)?/, '') // Remove the file ending
 			.replace(/index$/, '')
 			.replace(/(?<=\w)\/$/, ''); // Change indexes to the base route
 
