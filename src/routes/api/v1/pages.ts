@@ -1,3 +1,4 @@
+import Fuse from 'fuse.js';
 import type { RequestHandler } from '@sveltejs/kit';
 import type { Breadcrumb, Page } from '$lib/types/pages';
 
@@ -5,8 +6,14 @@ import type { Breadcrumb, Page } from '$lib/types/pages';
  * Get a list of all the pages in the site.
  */
 export const get: RequestHandler = async ({ url: { searchParams: params } }) => {
-	const pages: Page[] = [];
-	const modules = import.meta.glob('../../../**/*.svelte(.md)?');
+	// Get the supported params
+	const parent = params.get('parent');
+	const q = params.get('q');
+
+	// Initialize the pages
+	let pages: Page[] = [];
+
+	const modules = import.meta.glob('../../**/*.svelte(.md)?');
 	const sortedModules = sortModules(modules);
 
 	let id = 1;
@@ -23,25 +30,24 @@ export const get: RequestHandler = async ({ url: { searchParams: params } }) => 
 		}
 
 		const title = metadata && metadata.title;
+		const layout = metadata && metadata.layout;
 		breadcrumbs.push({ id, href, title });
 		const page = {
 			id,
-			href,
 			title,
+			href,
+			layout,
 			breadcrumbs: [...breadcrumbs]
 		};
 
 		// If all pages are wanted, add to the pile no matter what
-		if (!params.get('parent')) {
+		if (!parent) {
 			pages.push(page);
 			id++;
 			continue;
 		}
 
-		const parentPattern = new RegExp(
-			`^${decodeURIComponent(params.get('parent'))}(?=/[a-zA-Z])`,
-			'i'
-		);
+		const parentPattern = new RegExp(`^${decodeURIComponent(parent)}(?=/[a-zA-Z])`, 'i');
 
 		if (href.match(parentPattern)) {
 			pages.push(page);
@@ -49,8 +55,31 @@ export const get: RequestHandler = async ({ url: { searchParams: params } }) => 
 		}
 	}
 
+	if (q) {
+		const fuse = new Fuse(pages, { keys: ['title'] });
+		pages = fuse
+			.search(q)
+			.slice(0, 10)
+			.map((result) => ({ ...result.item }));
+
+		return {
+			body: {
+				pages: fuse
+					.search(q)
+					.slice(0, 10)
+					.map((result) => ({ ...result.item })),
+				parent,
+				q
+			}
+		};
+	}
+
 	return {
-		body: pages
+		body: {
+			pages,
+			parent,
+			q
+		}
 	};
 };
 
@@ -68,7 +97,7 @@ function sortModules(
 	for (const [filePath, importFn] of Object.entries(modules)) {
 		if (filePath.includes('/api/')) continue;
 		const href = filePath
-			.replace('../../../', '/') // Get rid of the beginning of every route
+			.replace('../../', '/') // Get rid of the beginning of every route
 			.replace(/[.]svelte(?:[.]md)?/, '') // Remove the file ending
 			.replace(/index$/, '')
 			.replace(/(?<=\w)\/$/, ''); // Change indexes to the base route

@@ -3,6 +3,8 @@ export type Page = {
 	href: string;
 	breadcrumbs: Breadcrumb[];
 	title?: string;
+	layout?: string;
+	type?: string;
 };
 
 export type Breadcrumb = {

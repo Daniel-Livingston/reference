@@ -5,7 +5,7 @@ layout: article
 
 <script context="module">
   export async function load({ fetch, url }) {
-    const response = await fetch('/api/v1/pages.json?parent=' + url.pathname);
+    const response = await fetch('/api/v1/pages?parent=' + url.pathname);
     return {
       stuff: {
         title: 'Cheatsheets'

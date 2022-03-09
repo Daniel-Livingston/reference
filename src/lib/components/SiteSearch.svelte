@@ -1,8 +1,9 @@
 <script lang="ts">
+	import { getContext } from 'svelte';
 	import type { Page } from '$lib/types/pages';
 	import Fuse from 'fuse.js';
 
-	export let pages: Page[];
+	let { all: pages }: { all: Page[]; current: Page } = getContext('pages');
 
 	const fuse = new Fuse(pages, { keys: ['title'], includeMatches: true });
 	let value: string = '';
