@@ -1,0 +1,4 @@
+---
+title: Attributes
+layout: article
+---

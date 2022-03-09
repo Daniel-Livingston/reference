@@ -5,7 +5,13 @@
 
 	let { all: pages }: { all: Page[]; current: Page } = getContext('pages');
 
-	const fuse = new Fuse(pages, { keys: ['title'], includeMatches: true });
+	const fuse = new Fuse(pages, {
+		keys: [
+			{ name: 'title', weight: 2 },
+			{ name: 'tags', weight: 1 }
+		],
+		includeMatches: true
+	});
 	let value: string = '';
 
 	$: searchResults = fuse.search(value).slice(0, 10);

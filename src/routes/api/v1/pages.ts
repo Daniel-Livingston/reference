@@ -31,11 +31,16 @@ export const get: RequestHandler = async ({ url: { searchParams: params } }) => 
 
 		const title = metadata && metadata.title;
 		const layout = metadata && metadata.layout;
+		const tags = metadata ? metadata.tags : [];
+		const excludeFromSearch = metadata && metadata.excludeFromSearch;
+		if (excludeFromSearch) continue;
+
 		breadcrumbs.push({ id, href, title });
 		const page = {
 			id,
 			title,
 			href,
+			tags,
 			layout,
 			breadcrumbs: [...breadcrumbs]
 		};

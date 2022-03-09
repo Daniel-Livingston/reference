@@ -2,6 +2,7 @@ export type Page = {
 	id: number;
 	href: string;
 	breadcrumbs: Breadcrumb[];
+	tags: string[];
 	title?: string;
 	layout?: string;
 	type?: string;
